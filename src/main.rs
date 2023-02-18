@@ -1,4 +1,5 @@
 use std::env;
+use std::fs;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -8,11 +9,10 @@ fn main() {
     // filepath
     let filepath = &args[2];
 
-    // case insitive?
-    let third_arg = &args[3];
+    let contents = fs::read_to_string(filepath).expect("Wanted to read a file");
 
-    println!("first arg: {}", query);
-    println!("second arg: {}", filepath);
-    println!("third arg: {}", third_arg);
+    println!("first arg: {query}");
+    println!("second arg: {filepath}");
+    println!("poem\n{contents}");
     // println!("{:?}", args);
 }
