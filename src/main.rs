@@ -1,19 +1,23 @@
 use std::env;
 use std::fs;
+use std::process;
 
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    let config = Config::build(&args).unwrap_or_else(|err| {
-        println!("Problem parsing args: {err}");
-        std::process::exit(1);
-    });
-
+fn run(config: Config) {
     let contents = fs::read_to_string(&config.filepath).expect("Wanted to read a file");
 
     println!("first arg: {}", &config.query);
     println!("second arg: {}", &config.filepath);
     println!("poem\n{contents}");
-    // println!("{:?}", args);
+}
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    let config = Config::build(&args).unwrap_or_else(|err| {
+        println!("Problem parsing args: {err}");
+        process::exit(1);
+    });
+
+    run(config)
 }
 
 struct Config {
