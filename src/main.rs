@@ -1,6 +1,6 @@
-use std::process;
-use std::env;
 use mini_grep;
+use std::env;
+use std::process;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -13,4 +13,3 @@ fn main() {
         // TODO: handle error
     }
 }
-
